@@ -17,7 +17,7 @@ public class CSVFileReader implements FileReader {
         try (InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
              BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
             String line;
-            String values[];
+            String[] values;
             while ((line = bufferedReader.readLine()) != null) {
                 values = line.split(",");
                 resultMap.put(Integer.valueOf(values[0]), new BigDecimal(values[1]));

@@ -1,15 +1,17 @@
 package com.epam.brest.model;
 
+import com.epam.brest.Main;
+
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Scanner;
 
-import static com.epam.brest.model.StatusType.EXIT;
 import static com.epam.brest.model.StatusType.READ_DATA;
 
 public class ReadDataState extends AbstractStatus {
 
     public static final int NUMBER_OF_USER_DATA = 2;
+    ExitState exitState = (ExitState) Main.applicationContext.getBean("exitState");
 
     public ReadDataState(Scanner scanner, Map<Integer, BigDecimal> pricePerKgMap, Map<Integer, BigDecimal> pricePerKmMap) {
         this.scanner = scanner;
@@ -23,7 +25,7 @@ public class ReadDataState extends AbstractStatus {
             System.out.println(messages.get(userData.size()));
             String inputValue = scanner.next();
             if (inputValue.equalsIgnoreCase("q")) {
-                return new ExitState();
+                return exitState;
             } else if (isCorrectValue(inputValue)) {
                 userData.add(new BigDecimal(inputValue));
             }
